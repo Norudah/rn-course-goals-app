@@ -1,13 +1,16 @@
-// import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import { StyleSheet, Text, View, Button, TextInput, ScrollView } from "react-native";
 
 export default function App() {
   const [newGoal, setNewGoal] = useState("");
   const [goals, setGoals] = useState([]);
 
   const goalCards = goals.map((goal) => {
-    return <Text key={goal}>{goal}</Text>;
+    return (
+      <View key={goal} style={styles.goal}>
+        <Text>{goal}</Text>
+      </View>
+    );
   });
 
   return (
@@ -20,7 +23,7 @@ export default function App() {
         />
         <Button title="Ajouter" onPress={() => setGoals((currGoals) => [...currGoals, newGoal])} />
       </View>
-      <View>{goalCards}</View>
+      <ScrollView>{goalCards}</ScrollView>
     </View>
   );
 }
@@ -33,11 +36,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    paddingBottom: 10,
   },
   input: {
     borderBottomColor: "black",
     borderBottomWidth: 1,
     flex: 1,
     marginRight: 15,
+  },
+  goal: {
+    backgroundColor: "#ccc",
+    borderColor: "black",
+    borderWidth: 1,
+    marginBottom: 20,
+    padding: 5,
   },
 });
