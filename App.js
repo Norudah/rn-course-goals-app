@@ -1,17 +1,24 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, TextInput, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Button, TextInput, FlatList } from "react-native";
 
 export default function App() {
   const [newGoal, setNewGoal] = useState("");
   const [goals, setGoals] = useState([]);
 
-  const goalCards = goals.map((goal) => {
+  const addNewGoal = () => {
+    setGoals((currGoals) => [
+      ...currGoals,
+      { id: Math.random().toString(), value: newGoal },
+    ]);
+  };
+
+  const renderItem = (params) => {
     return (
-      <View key={goal} style={styles.goal}>
-        <Text>{goal}</Text>
+      <View style={styles.goal}>
+        <Text>{params.item.value}</Text>
       </View>
     );
-  });
+  };
 
   return (
     <View style={styles.layout}>
@@ -21,9 +28,9 @@ export default function App() {
           placeholder="Entrer un goal ici..."
           onChangeText={(e) => setNewGoal(e)}
         />
-        <Button title="Ajouter" onPress={() => setGoals((currGoals) => [...currGoals, newGoal])} />
+        <Button title="Ajouter" onPress={addNewGoal} />
       </View>
-      <ScrollView>{goalCards}</ScrollView>
+      <FlatList data={goals} renderItem={renderItem} />
     </View>
   );
 }
