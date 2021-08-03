@@ -6,6 +6,10 @@ export default function App() {
   const [newGoal, setNewGoal] = useState("");
   const [goals, setGoals] = useState([]);
 
+  const goalCards = goals.map((goal) => {
+    return <Text key={goal}>{goal}</Text>;
+  });
+
   return (
     <View style={styles.layout}>
       <View style={styles.topBar}>
@@ -16,6 +20,7 @@ export default function App() {
         />
         <Button title="Ajouter" onPress={() => setGoals((currGoals) => [...currGoals, newGoal])} />
       </View>
+      <View>{goalCards}</View>
     </View>
   );
 }
@@ -24,13 +29,11 @@ const styles = StyleSheet.create({
   layout: {
     padding: 50,
   },
-
   topBar: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
   },
-
   input: {
     borderBottomColor: "black",
     borderBottomWidth: 1,
