@@ -11,6 +11,9 @@ export default function GoalInput(props) {
           onChangeText={props.editNewGoal}
         />
         <Button title="Ajouter" onPress={props.addNewGoal} />
+        <View style={styles.cancelButton}>
+          <Button title="Annuler" onPress={props.onCancel} />
+        </View>
       </View>
     </Modal>
   );

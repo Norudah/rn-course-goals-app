@@ -14,6 +14,7 @@ export default function App() {
       { id: Math.random().toString(), value: newGoal },
     ]);
     setIsSetMode(false);
+    setNewGoal("");
   };
 
   const deleteGoalHandler = (id) => {
@@ -21,6 +22,11 @@ export default function App() {
   };
 
   const editNewGoalHandler = (value) => setNewGoal(value);
+
+  const cancelEditingHandler = () => {
+    setIsSetMode(false);
+    setNewGoal("");
+  };
 
   const renderItem = (params) => {
     return (
@@ -39,6 +45,7 @@ export default function App() {
         editNewGoal={editNewGoalHandler}
         addNewGoal={addNewGoalHandler}
         isSetMode={isSetMode}
+        onCancel={cancelEditingHandler}
       />
       <FlatList data={goals} renderItem={renderItem} />
     </View>
