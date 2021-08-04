@@ -14,9 +14,20 @@ export default function App() {
     ]);
   };
 
+  const deleteGoalHandler = (id) => {
+    setGoals((currentGoals) => currentGoals.filter((goal) => id !== goal.id));
+  };
+
   const editNewGoalHandler = (value) => setNewGoal(value);
 
-  const renderItem = (params) => <GoalItem title={params.item.value} />;
+  const renderItem = (params) => {
+    return (
+      <GoalItem
+        title={params.item.value}
+        onDeleteGoal={deleteGoalHandler.bind(this, params.item.id)}
+      />
+    );
+  };
 
   return (
     <View style={styles.layout}>
